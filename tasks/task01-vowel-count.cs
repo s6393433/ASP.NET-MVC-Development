@@ -9,9 +9,20 @@ public class Program
 {
 	public static int CountVowels(string s)
 	{
-		// ИЗМЕНИТЕ КОД ЭТОГО МЕТОДА
-		return -1;
-	}
+            // ИЗМЕНИТЕ КОД ЭТОГО МЕТОДА
+            if (s == null)
+            {
+                throw new ArgumentNullException("s");
+            }
+            string vocalCharacters = "aeiou";
+            int CountVowels = 0;
+            for (int i = 0; i < s.Length; i++)
+            {
+                CountVowels += vocalCharacters.IndexOf(s.Substring(i, 1)) < 0 ? 0 : 1;
+            }
+
+            return CountVowels;
+        }
 
 	// ----- ЗАПРЕЩЕНО ИЗМЕНЯТЬ КОД МЕТОДОВ, КОТОРЫЕ НАХОДЯТСЯ НИЖЕ -----
 
