@@ -11,13 +11,71 @@ using System.Linq;
 
 public class Program
 {
-	public static int[] Filter(int[] source)
-	{
-		// ИЗМЕНИТЕ КОД ЭТОГО МЕТОДА
-		return Array.Empty<int>();
-	}
+    public static int[] Filter(int[] source)
+    {
+        // ИЗМЕНИТЕ КОД ЭТОГО МЕТОДА
+        if (source == null)
+        {
+            throw new ArgumentNullException("source");
+        }
+        if(source.Length>1)
+        {
+            int[] indexToDelete = new int[source.Length];
+            int k, i;
+            bool start;
+            i = 0;
+            do
+            {
+                k = 0;
+                start = true;
+                for (int j = i + 1; j < source.Length; j++)
+                {
+                    if (source[i] == source[j])
+                    {
+                        if (start)
+                        {
+                            indexToDelete[k++] = i;
+                            start = false;
+                        }
+                        indexToDelete[k++] = j;
+                    }
+                }
+                if (!start)
+                {
+                    for (int z = k - 1; z >= 0; z--)
+                    {
+                        source = Delete(source, indexToDelete[z]);
+                    }
+                    i--;
+                }
+                i++;
+            }
+            while (i < source.Length - 1);
+        }
+        return source;
+    }
 
-	// ДОБАВЬТЕ НОВЫЕ МЕТОДЫ, ЕСЛИ НЕОБХОДИМО
+    // ДОБАВЬТЕ НОВЫЕ МЕТОДЫ, ЕСЛИ НЕОБХОДИМО
+    // Метод, который удаляет указанный элемент в массиве и
+    // возвращает копию массива без этого элемента
+    static int[] Delete(int[] array, int indexToDelete)
+    {
+        // Проверки, что наш массив не пуст и что указанный индекс существует.
+        if (array.Length == 0) return array;
+        if (array.Length <= indexToDelete) return array;
+
+        var output = new int[array.Length - 1];
+        int counter = 0;
+
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (i == indexToDelete) continue;
+            output[counter] = array[i];
+            counter++;
+        }
+
+        return output;
+    }
 
 	// ----- ЗАПРЕЩЕНО ИЗМЕНЯТЬ КОД МЕТОДОВ, КОТОРЫЕ НАХОДЯТСЯ НИЖЕ -----
 
