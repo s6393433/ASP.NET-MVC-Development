@@ -8,14 +8,53 @@ using System;
 
 public class Program
 {
-	public static bool FindMinMax(int[][] array, out int min, out int max)
-	{
-		min = int.MinValue;
-		max = int.MaxValue;
-
-		// ИЗМЕНИТЕ КОД ЭТОГО МЕТОДА
-		return false;
-	}
+    public static bool FindMinMax(int?[][] array, out int min, out int max)
+    {
+        if (array == null)
+        {
+            throw new ArgumentNullException("array");
+        }
+        bool ret;
+        int minValue, maxValue;
+        minValue = 0;
+        maxValue = 0;
+        ret = false;
+        if (array.Length>0)
+        {
+            int i = 0;
+            int j = 0;
+            foreach (int?[] subarray in array)
+            {
+                foreach (int iVal in subarray)
+                {
+                    if(array[i][j] != null)
+                    {
+                        ret = true;
+                        if (minValue > array[i][j])
+                        {
+                            minValue = (int)array[i][j];
+                        }
+                        if (maxValue < array[i][j])
+                        {
+                            maxValue = (int)array[i][j];
+                        }
+                    }
+                    j++;
+                }
+                i++;
+            }
+        }
+        if(ret)
+        {
+            min = minValue;
+            max = maxValue;
+            return true;
+        }
+        // ИЗМЕНИТЕ КОД ЭТОГО МЕТОДА
+        min = 0;
+        max = 0;
+        return false;
+    }
 
 	// ДОБАВЬТЕ НОВЫЕ МЕТОДЫ, ЕСЛИ НЕОБХОДИМО
 
