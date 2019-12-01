@@ -10,8 +10,28 @@ public class Program
 {
     public static string[] SortStringArray(string[] array)
     {
-		// ИЗМЕНИТЕ КОД ЭТОГО МЕТОДА.
-        return Array.Empty<string>();
+	// ИЗМЕНИТЕ КОД ЭТОГО МЕТОДА.
+	if (array == null)
+        {
+           throw new ArgumentNullException("array");
+        }
+        string temp;
+        if (array.Length>1)
+        {
+            for (int i = 0; i < array.Length - 1; i++)
+            {
+                for (int j = array.Length - 1; j > i; j--)
+                {
+                    if (array[i].Length > array[j].Length)
+                    {
+                        temp = array[i];
+                        array[i] = array[j];
+                        array[j] = temp;
+                    }
+                }
+            }
+        }
+        return array;
     }
 
     // ----- ЗАПРЕЩЕНО ИЗМЕНЯТЬ КОД МЕТОДОВ, КОТОРЫЕ НАХОДЯТСЯ НИЖЕ -----
