@@ -8,54 +8,67 @@ using System;
 
 public class Program
 {
-    public static bool FindMinMax(int?[][] array, out int min, out int max)
+    public static bool FindMinMax(int[][] array, out int min, out int max)
     {
         if (array == null)
         {
             throw new ArgumentNullException("array");
         }
+        bool start = true;
         bool ret;
         int minValue, maxValue;
         minValue = 0;
         maxValue = 0;
         ret = false;
-        if (array.Length>0)
+        if (array.Length > 0 && array[0]!=null)
         {
             int i = 0;
             int j = 0;
-            foreach (int?[] subarray in array)
+            foreach (int[] subarray in array)
             {
-                foreach (int iVal in subarray)
+                if (subarray!=null)
                 {
-                    if(array[i][j] != null)
+                    foreach (int iVal in subarray)
                     {
-                        ret = true;
-                        if (minValue > array[i][j])
+                        if (array[i][j] * 0 == 0)
                         {
-                            minValue = (int)array[i][j];
+                            if (start)
+                            {
+                                ret = true;
+                                minValue = array[i][j];
+                                maxValue = array[i][j];
+                                start = false;
+                            }
+                            else
+                            {
+                                ret = true;
+                                if (minValue > iVal)
+                                {
+                                    minValue = (int)iVal;
+                                }
+                                if (maxValue < iVal)
+                                {
+                                    maxValue = (int)iVal;
+                                }
+                            }
+
                         }
-                        if (maxValue < array[i][j])
-                        {
-                            maxValue = (int)array[i][j];
-                        }
+                        j++;
                     }
-                    j++;
                 }
                 i++;
             }
         }
-        if(ret)
+        if (ret)
         {
             min = minValue;
             max = maxValue;
             return true;
         }
-        // ИЗМЕНИТЕ КОД ЭТОГО МЕТОДА
         min = 0;
         max = 0;
         return false;
     }
-
 	// ДОБАВЬТЕ НОВЫЕ МЕТОДЫ, ЕСЛИ НЕОБХОДИМО
 
 	// ----- ЗАПРЕЩЕНО ИЗМЕНЯТЬ КОД МЕТОДОВ, КОТОРЫЕ НАХОДЯТСЯ НИЖЕ -----
