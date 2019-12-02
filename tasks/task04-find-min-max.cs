@@ -30,8 +30,6 @@ public class Program
                 {
                     foreach (int iVal in subarray)
                     {
-                        if (array[i][j] * 0 == 0)
-                        {
                             if (start)
                             {
                                 ret = true;
@@ -51,8 +49,6 @@ public class Program
                                     maxValue = (int)iVal;
                                 }
                             }
-
-                        }
                         j++;
                     }
                 }
